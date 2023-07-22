@@ -8,7 +8,7 @@ import (
 	"github.com/gruntwork-io/terratest/modules/terraform"
 )
 
-func TestTerraformDeploy(t *testing.T) {
+func TestRecreate(t *testing.T) {
 	t.Parallel()
 	uniqueID := random.UniqueId()
 	terraformOptions := terraform.WithDefaultRetryableErrors(t, &terraform.Options{

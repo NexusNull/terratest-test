@@ -1,21 +1,14 @@
 resource "google_container_cluster" "primary" {
-  name     = "my-gke-cluster"
-  location = "us-central1"
+  name     = var.cluster_name
+  location = "us-central1-a"
 
-  remove_default_node_pool = true
+  
   initial_node_count       = 1
-}
-
-resource "google_container_node_pool" "primary_preemptible_nodes" {
-  name       = "my-node-pool"
-  location   = "us-central1"
-  cluster    = google_container_cluster.primary.name
-  node_count = 1
-
   node_config {
     preemptible  = true
-    machine_type = "e2-medium"
-
+    machine_type = "g1-small"
+    disk_size_gb = 10
+    
     # Google recommends custom service accounts that have cloud-platform scope and permissions granted via IAM Roles.
     oauth_scopes    = [
       "https://www.googleapis.com/auth/cloud-platform"
